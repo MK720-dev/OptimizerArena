@@ -9,7 +9,7 @@ OptimizerArena is a research-grade visualization platform for analyzing neural n
 
 OptimizerArena extends a custom neural-network training engine with advanced tools for:
 
-* Comparing optimizers (SGD, Momentum, RMSProp, Adam, BFGS, etc.)
+* Comparing optimizers (SGD, RMSProp, Adam, BFGS, etc.)
 * Capturing weight trajectories during training
 * Performing PCA on high-dimensional weight vectors
 * Sampling 2D slices of the loss landscape
@@ -339,6 +339,7 @@ OptimizerArena/
 If you use OptimizerArena for research or teaching, please cite this repository.
 
 ---
+
 
 
 
