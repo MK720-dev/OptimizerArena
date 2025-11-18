@@ -1,0 +1,91 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-left: -100px;
+    margin-top: 0px;
+    text-align: left;
+}
+
+.container-item {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.button-style {
+    margin-top: 1rem; /* mt-4 (assuming default Tailwind spacing scale where 1 unit = 0.25rem) */
+    background-color: #2563eb; /* bg-blue-600 (a standard hex code for blue-600) */
+    color: white; /* text-white */
+    padding-left: 1rem; /* px-4 */
+    padding-right: 1rem; /* px-4 */
+    padding-top: 0.5rem; /* py-2 */
+    padding-bottom: 0.5rem; /* py-2 */
+    border-radius: 0.25rem; /* rounded (assuming default Tailwind radius) */
+    width: 100%; /* w-full */
+    text-align: center;
+}
+
+.left-item {
+    flex: 0 0 300px; /* Fixed width */
+}
+
+.middle-item {
+    flex: 1; /* Takes remaining space */
+    min-width: 550px;
+}
+
+.right-item {
+    flex: 1;
+    min-width: 550px;
+}
+
+.app-title {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: -10px;
+}
+
