@@ -1,6 +1,3 @@
-Here is the full README in clean **Markdown**, ready to copy/paste:
-
----
 
 # OptimizerArena
 
@@ -8,7 +5,7 @@ OptimizerArena is a research-grade visualization platform for analyzing neural n
 
 ---
 
-## ⭐ Overview
+## Overview
 
 OptimizerArena extends a custom neural-network training engine with advanced tools for:
 
@@ -288,72 +285,54 @@ http://localhost:5173
 OptimizerArena/
 │
 ├── backend/
-│   ├── main.py
+│   ├── app/
+│   │   ├── schemas/
+│   │   ├── services/
+│   │   ├── utils/
+│   │   ├── __pycache__/
+│   │   ├── main.py
+│   │   └── __init__.py
+│   │
+│   ├── venv/
+│   ├── __pycache__/
+│   ├── .env
+│   ├── .env.example
+│   ├── backend.pyproj
+│   ├── backend.pyproj.user
+│   ├── neural_network.py
 │   ├── optimizers.py
-│   ├── pca_utils.py
-│   ├── loss_surface.py
-│   └── models/
+│   └── requirements.txt
 │
 ├── frontend/
+│   ├── .vscode/
+│   ├── node_modules/
+│   ├── obj/
+│   ├── public/
 │   ├── src/
-│   ├── components/
-│   ├── threejs/
-│   └── ...
+│   │   ├── (React components, hooks, styles, utils, etc.)
+│   │   └── ...
+│   │
+│   ├── .env
+│   ├── .env.example
+│   ├── .gitignore
+│   ├── CHANGELOG.md
+│   ├── eslint.config.js
+│   ├── frontend.esproj
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── README.md
+│   ├── tsconfig.app.json
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   └── vite.config.ts
 │
-└── README.md
+├── .gitignore
+├── README.md
+└── LICENSE
+
 ```
-flowchart TD
 
-    A[OptimizerArena] --> B[backend]
-    A --> C[frontend]
-    A --> D[.gitignore]
-    A --> E[LICENSE]
-
-    %% Backend
-    B --> B1[app]
-    B --> B2[venv/]
-    B --> B3[__pycache__/]
-    B --> B4[.env]
-    B --> B5[.env.example]
-    B --> B6[backend.pyproj]
-    B --> B7[backend.pyproj.user]
-    B --> B8[neural_network.py]
-    B --> B9[optimizers.py]
-    B --> B10[requirements.txt]
-
-    %% Backend/app contents
-    B1 --> B1a[schemas/]
-    B1 --> B1b[services/]
-    B1 --> B1c[utils/]
-    B1 --> B1d[__pycache__/]
-    B1 --> B1e[main.py]
-    B1 --> B1f[__init__.py]
-
-    %% Frontend
-    C --> C1[.vscode/]
-    C --> C2[node_modules/]
-    C --> C3[obj/]
-    C --> C4[public/]
-    C --> C5[src/]
-    C --> C6[.env]
-    C --> C7[.env.example]
-    C --> C8[.gitignore]
-    C --> C9[CHANGELOG.md]
-    C --> C10[eslint.config.js]
-    C --> C11[frontend.esproj]
-    C --> C12[index.html]
-    C --> C13[package-lock.json]
-    C --> C14[package.json]
-    C --> C15[README.md]
-    C --> C16[tsconfig.app.json]
-    C --> C17[tsconfig.json]
-    C --> C18[tsconfig.node.json]
-    C --> C19[vite.config.ts]
-
-    %% Frontend/src contents (generalized)
-    C5 --> C5a[(Components, hooks, styles, utils, etc.)]
-
----
 
 # 7. Citation
 
@@ -361,12 +340,6 @@ If you use OptimizerArena for research or teaching, please cite this repository.
 
 ---
 
-If you’d like, I can also produce:
 
-* a **mini** version of this README,
-* a **PDF/tech-report** version, or
-* a **version with diagrams/Mermaid figures**.
-
-Just tell me!
 
 
