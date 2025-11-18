@@ -1,0 +1,2 @@
+OptimizerArena is a research-grade visualization platform for analyzing neural network optimization algorithms through interactive 3D loss landscape exploration. 
+This document provides a comprehensive technical overview of the system's mathematical foundations, particularly the role of Principal Component Analysis (PCA) in enabling high-dimensional weight trajectory visualization, along with detailed implementation insights spanning backend algorithms, frontend architecture, and design decisions that balance mathematical correctness with visual interpretability.
