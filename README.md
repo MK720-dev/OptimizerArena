@@ -140,21 +140,21 @@ w_0, w_1, \dots, w_T \in \mathbb{R}^n
 
 ### Step 2 — Form the data matrix
 
-$$[
+$$
 M \in \mathbb{R}^{(T+1)\times n}
-]$$
+$$
 
 ### Step 3 — Center the data
 
-$$[
+$$
 X = M - \mu
-]$$
+$$
 
 ### Step 4 — Apply SVD
 
-$$[
+$$
 X = U S V^T
-]$$
+$$
 
 Right-singular vectors ( V ) are the **principal component directions**.
 
@@ -164,15 +164,15 @@ Typically ( k = 2 ) or ( k = 3).
 
 ### Step 6 — Project weights into PCA space
 
-$$[
+$$
 z = (w - \mu)V_k
-]$$
+$$
 
 ### Step 7 — Explained variance
 
-$$[
+$$
 \text{var}_i = \frac{s_i^2}{\sum_j s_j^2}
-]$$
+$$
 
 ---
 
@@ -180,15 +180,15 @@ $$[
 
 ## 3.1 Forward Projection
 
-$$[
+$$
 z = (w - \mu)V_k
-]$$
+$$
 
 ## 3.2 Inverse Reconstruction
 
-$$[
+$$
 \hat w = \mu + \sum_{i=1}^k z_i v_i
-]$$
+$$
 
 This reconstructs weights for computing loss values at grid points or trajectory points.
 
@@ -206,9 +206,9 @@ This reconstructs weights for computing loss values at grid points or trajectory
 
 We define:
 
-$$[
+$$
 w(\alpha,\beta) = \mu + \alpha v_1 + \beta v_2
-]$$
+$$
 
 Sampling this plane yields a **dense 2D grid** for the 3D surface plot.
 
@@ -339,6 +339,7 @@ OptimizerArena/
 If you use OptimizerArena for research or teaching, please cite this repository.
 
 ---
+
 
 
 
