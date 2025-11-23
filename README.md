@@ -18,10 +18,56 @@ OptimizerArena extends a custom neural-network training engine with advanced too
 The platform is designed for research, teaching, and the empirical study of optimization behavior in deep learning.
 
 ---
+# 1. Web App Architecture Overview
 
-# 1. Backend Architecture & Training Pipeline
+                ┌─────────────────────────────────┐
+                │       Python Backend            │
+                │        (FastAPI API)            │
+                │   - Training engine             │
+                │   - Optimizers (SGD, BFGS,...)  │
+                │   - PCA + Loss Surface          │
+                └───────────────┬─────────────────┘
+                                │
+                                │  HTTP (JSON)
+                                │  /train, /pca
+                                ▼
+                 ┌────────────────────────────┐
+                 │    Vite Dev Server         │
+                 │  (Node.js Proxy Gateway)   │
+                 │                            │
+                 │  Proxies: /api/* → FastAPI │
+                 └───────────────┬────────────┘
+                                 │
+                                 │  Local WebSocket + HTTP
+                                 ▼
+                 ┌───────────────────────────┐
+                 │       React Frontend      │
+                 │  - Controls Panel UI      │
+                 │  - Arena3D Visualization  │
+                 │  - Plotly Loss Surface    │
+                 │  - Optimizer Trajectory   │
+                 └───────────────────────────┘
 
-## 1.1 Correct Loss Function Selection
+## FastAPI (Python backend)
+Implements all core computation: neural-network training, optimizers, PCA, loss-surface reconstruction.
+Exposes routes like /api/train and /api/pca.
+
+## Node.js / Vite dev server
+Acts as a reverse proxy, forwarding all /api/* requests to FastAPI during development.
+Also serves the bundled React assets.
+
+## React Frontend (Vite client)
+Renders UI, collects user parameters, triggers backend training calls, and visualizes:
+
+- optimizer trajectories
+
+- PCA projections
+
+- 3D loss surfaces with Plotly
+
+# 2. Backend Architecture & Training Pipeline
+
+## 2.1 Correct Loss Function Selection
 
 Previous versions incorrectly applied MSE to all tasks, including binary classification. This caused issues such as vanishing gradients and incorrect probabilistic assumptions.
 
@@ -41,7 +87,7 @@ Additional backend improvements:
 
 ---
 
-## 1.2 BFGS Optimizer Redesign
+## 2.2 BFGS Optimizer Redesign
 
 The earlier implementation incorrectly nested BFGS iterations inside the epoch loop.
 
@@ -57,7 +103,7 @@ This yields smoother, more mathematically valid BFGS behavior.
 
 ---
 
-## 1.3 Weight Capture Strategy
+## 2.3 Weight Capture Strategy
 
 Weights are stored:
 
@@ -72,7 +118,7 @@ This ensures:
 
 ---
 
-## 1.4 Global Min–Max Normalization
+## 2.4 Global Min–Max Normalization
 
 Before:
 Surface, trajectory, and reconstructed trajectory were normalized **independently**, causing scale mismatch and floating trajectories.
@@ -93,13 +139,13 @@ Benefits:
 
 ---
 
-# 2. PCA-Enhanced Visualization
+# 3. PCA-Enhanced Visualization
 
 Neural networks operate in extremely high-dimensional parameter spaces. PCA provides a principled way to reduce this to 2D or 3D for visualization.
 
 ---
 
-## 2.1 The Visualization Challenge
+## 3.1 The Visualization Challenge
 
 We want to:
 
@@ -117,7 +163,7 @@ Thus PCA becomes essential.
 
 ---
 
-## 2.2 PCA as the Solution
+## 3.2 PCA as the Solution
 
 PCA extracts the dominant directions of variation in the optimizer trajectory.
 
@@ -130,7 +176,7 @@ It provides:
 
 ---
 
-## 2.3 Mathematical Summary
+## 3.3 Mathematical Summary
 
 ### Step 1 — Collect weight snapshots
 
@@ -176,15 +222,15 @@ $$
 
 ---
 
-# 3. Weight Reconstruction & Loss Surface Rendering
+# 4. Weight Reconstruction & Loss Surface Rendering
 
-## 3.1 Forward Projection
+## 4.1 Forward Projection
 
 $$
 z = (w - \mu)V_k
 $$
 
-## 3.2 Inverse Reconstruction
+## 4.2 Inverse Reconstruction
 
 $$
 \hat w = \mu + \sum_{i=1}^k z_i v_i
@@ -194,7 +240,7 @@ This reconstructs weights for computing loss values at grid points or trajectory
 
 ---
 
-## 3.3 Reconstruction Strategies
+## 4.3 Reconstruction Strategies
 
 ### **A. Trajectory Reconstruction — Use All PCs (k = larger)**
 
@@ -220,7 +266,7 @@ Why only two?
 
 ---
 
-## 3.4 Why the Trajectory Appears on the Surface
+## 4.4 Why the Trajectory Appears on the Surface
 
 Even though trajectories use more PCs:
 
@@ -233,7 +279,7 @@ Small deviations arise from reconstruction error, but are usually imperceptible.
 
 ---
 
-# 4. Frontend Architecture
+# 5. Frontend Architecture
 
 The frontend (React + Three.js) supports:
 
@@ -251,7 +297,198 @@ Communication with the backend occurs via REST endpoints for:
 
 ---
 
-# 5. Quick Start
+# 6. Datasets overview
+
+OptimizerArena supports multiple datasets spanning regression, binary classification, and multiclass classification, allowing users to evaluate optimizer behavior across a diverse set of learning problems. All datasets are standardized into the format:
+
+```
+X : (n_features, n_samples)
+y : (1 or C, n_samples)
+meta : { input_dim, output_dim, task_type, name }
+```
+
+## Synthetic Regression Datasets
+
+Synthetic regression datasets are generated procedurally and expose different levels of function complexity. All synthetic regression inputs are sampled as:
+
+X ∈ ℝ² sampled from N(0,1)
+
+y computed using one of three analytic functions + Gaussian noise
+
+Simple Function (Linear)
+$$𝑦
+=
+3
+𝑥
+1
++
+2
+𝑥
+2
++
+𝜀
+y=3x
+1
+	​
+
++2x
+2
+	​
+
++ε$$
+
+- Low curvature
+
+- Good for verifying correctness of optimizers
+
+- Expected nearly convex loss surface
+
+Medium Function (Mildly Nonlinear)
+$$𝑦
+=
+𝑥
+1
+2
++
+sin
+⁡
+(
+𝑥
+2
+)
++
+𝜀
+y=x
+1
+2
+	​
+
++sin(x
+2
+	​
+
+)+ε$$
+
+- Introduces moderate nonlinearity
+
+- Contains local curvature variations
+
+- Useful for testing adaptive optimizers (Adam, RMSProp)
+
+Complex Function (Highly Nonlinear)
+$$𝑦
+=
+sin
+⁡
+(
+𝑥
+1
+𝑥
+2
+)
++
+0.5
+𝑥
+1
+3
+−
+𝑥
+2
+2
++
+𝜀
+y=sin(x
+1
+	​
+
+x
+2
+	​
+
+)+0.5x
+1
+3
+	​
+
+−x
+2
+2
+	​
+
++ε$$
+
+- Strong nonlinearity + multimodal structure
+
+- Produces a rugged loss landscape
+
+- Ideal for comparing behavior of first- vs second-order methods
+
+Synthetic datasets are controlled via:
+
+- dataset_name="synthetic"
+
+- func_variant ∈ {"simple","medium","complex"}
+
+## California Housing (Real Regression Dataset)
+
+✔ Task: Regression
+✔ Source: Scikit-learn’s fetch_california_housing()
+✔ Shape:
+
+Features: 8 (median income, house age, rooms, population, etc.)
+
+Samples: ~20,000
+
+This large real-world dataset allows testing:
+
+- Optimizer scalability
+
+- Sensitivity to feature scaling
+ 
+- Behavior on noisy, heterogeneous data
+
+## Breast Cancer (Binary Classification)
+
+✔ Task: Binary classification
+✔ Source: load_breast_cancer()
+✔ Labels: 0 (benign), 1 (malignant)
+✔ Features: 30
+
+Used to benchmark:
+
+- Binary cross-entropy vs MSE
+
+- Stability of optimizers on real classification tasks
+
+- Decision boundary sharpness for small networks
+
+## Iris Dataset (Multiclass Classification)
+
+✔ Task: Multiclass (3 classes)
+✔ Source: load_iris()
+✔ Features: 4
+✔ Classes: {0, 1, 2}
+
+Used for:
+
+- Testing softmax cross-entropy
+
+- Visualizing multiclass loss geometry
+
+- Understanding optimizer behavior on well-conditioned low-dimensional data
+
+Summary Table
+Dataset Name	Task Type	Complexity	Notes
+Synthetic (Simple)	Regression	Low	Linear model test
+Synthetic (Medium)	Regression	Medium	Mild nonlinearities
+Synthetic (Complex)	Regression	High	Rugged loss landscape
+California Housing	Regression (real)	Medium	Large real dataset
+Breast Cancer	Binary Classification	Low–Med	BCE loss evaluation
+Iris	Multiclass Classification	Low	Softmax model test
+
+---
+
+# 7. Quick Start
 
 ### **Backend (Terminal 1)**
 
@@ -279,7 +516,7 @@ http://localhost:5173
 
 ---
 
-# 6. Repository Structure
+# 8. Repository Structure
 
 ```
 OptimizerArena/
@@ -335,7 +572,7 @@ OptimizerArena/
 
 ---
 
-# 6. References
+# 9. References
 ## Optimization & Neural Network Training
 
 - Nocedal, J., & Wright, S. (2006). Numerical Optimization (2nd ed.). Springer.
@@ -367,11 +604,12 @@ OptimizerArena/
 - Goodfellow, I., Bengio, Y., & Courville, A. (2016). Deep Learning. MIT Press.
 — Chapters on optimization, curvature, and training instability.
 
-# 7. Citation
+# 10. Citation
 
 If you use OptimizerArena for research or teaching, please cite this repository.
 
 ---
+
 
 
 
