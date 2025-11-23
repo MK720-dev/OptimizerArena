@@ -17,6 +17,9 @@ OptimizerArena extends a custom neural-network training engine with advanced too
 
 The platform is designed for research, teaching, and the empirical study of optimization behavior in deep learning.
 
+## Visual Demo
+
+
 ---
 # 1. Web App Architecture Overview
 
@@ -573,6 +576,7 @@ Explore slicing techniques beyond 2-PC projection: use multi-plane slicing, 3-PC
 If you use OptimizerArena for research or teaching, please cite this repository.
 
 ---
+
 
 
 
