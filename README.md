@@ -309,14 +309,54 @@ meta : { input_dim, output_dim, task_type, name }
 
 ## Synthetic Regression Datasets
 
-Synthetic regression datasets are generated procedurally and expose different levels of function complexity. All synthetic regression inputs are sampled as:
+Synthetic regression datasets are procedurally generated to provide controlled difficulty levels.
+All synthetic inputs follow:
 
-X ∈ ℝ² sampled from N(0,1)
+Input sampling:
 
-y computed using one of three analytic functions + Gaussian noise
+𝑋
+∈
+𝑅
+2
+,
+𝑋
+∼
+𝑁
+(
+0
+,
+1
+)
+X∈R
+2
+,X∼N(0,1)
 
-Simple Function (Linear)
-$$𝑦
+Target generation:
+
+𝑦
+=
+𝑓
+(
+𝑋
+)
++
+𝜀
+,
+𝜀
+∼
+𝑁
+(
+0
+,
+ 
+0.1
+)
+y=f(X)+ε,ε∼N(0,0.1)
+
+Depending on the selected function func_variant ∈ { "simple", "medium", "complex" }, the target values come from one of the following analytic functions:
+
+### Simple Function (Linear)
+𝑦
 =
 3
 𝑥
@@ -335,16 +375,16 @@ y=3x
 2
 	​
 
-+ε$$
++ε
 
-- Low curvature
+Low curvature
 
-- Good for verifying correctness of optimizers
+Good for verifying correctness of optimizers
 
-- Expected nearly convex loss surface
+Produces an almost-convex loss surface
 
-Medium Function (Mildly Nonlinear)
-$$𝑦
+### Medium Function (Mildly Nonlinear)
+𝑦
 =
 𝑥
 1
@@ -367,16 +407,16 @@ y=x
 2
 	​
 
-)+ε$$
+)+ε
 
-- Introduces moderate nonlinearity
+Introduces moderate nonlinearity
 
-- Contains local curvature variations
+Contains local curvature variations
 
-- Useful for testing adaptive optimizers (Adam, RMSProp)
+Useful for evaluating adaptive optimizers (Adam, RMSProp)
 
-Complex Function (Highly Nonlinear)
-$$𝑦
+### Complex Function (Highly Nonlinear)
+𝑦
 =
 sin
 ⁡
@@ -386,16 +426,23 @@ sin
 𝑥
 2
 )
+  
 +
+  
 0.5
+ 
 𝑥
 1
 3
+  
 −
+  
 𝑥
 2
 2
+  
 +
+  
 𝜀
 y=sin(x
 1
@@ -415,20 +462,21 @@ x
 2
 	​
 
-+ε$$
++ε
 
-- Strong nonlinearity + multimodal structure
+Strong nonlinearity and multimodality
 
-- Produces a rugged loss landscape
+Produces a rugged loss landscape
 
-- Ideal for comparing behavior of first- vs second-order methods
+Ideal for contrasting first-order vs. second-order behavior
 
-Synthetic datasets are controlled via:
+Usage in OptimizerArena
 
-- dataset_name="synthetic"
+Synthetic datasets are configured by:
 
-- func_variant ∈ {"simple","medium","complex"}
+dataset_name="synthetic"
 
+func_variant ∈ {"simple", "medium", "complex"}
 ## California Housing (Real Regression Dataset)
 
 ✔ Task: Regression
@@ -609,6 +657,7 @@ OptimizerArena/
 If you use OptimizerArena for research or teaching, please cite this repository.
 
 ---
+
 
 
 
