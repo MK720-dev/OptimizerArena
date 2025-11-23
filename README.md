@@ -312,171 +312,51 @@ meta : { input_dim, output_dim, task_type, name }
 Synthetic regression datasets are procedurally generated to provide controlled difficulty levels.
 All synthetic inputs follow:
 
-Input sampling:
+- Input sampling:
 
-𝑋
-∈
-𝑅
-2
-,
-𝑋
-∼
-𝑁
-(
-0
-,
-1
-)
-X∈R
-2
-,X∼N(0,1)
+	𝑋 ∈ 𝑅2 , 𝑋 ∼ 𝑁(0,1)
 
-Target generation:
+- Target generation:
 
-𝑦
-=
-𝑓
-(
-𝑋
-)
-+
-𝜀
-,
-𝜀
-∼
-𝑁
-(
-0
-,
- 
-0.1
-)
-y=f(X)+ε,ε∼N(0,0.1)
+	𝑦 = 𝑓(𝑋) + 𝜀, 𝜀∼𝑁(0,0.1)
 
 Depending on the selected function func_variant ∈ { "simple", "medium", "complex" }, the target values come from one of the following analytic functions:
 
 ### Simple Function (Linear)
-𝑦
-=
-3
-𝑥
-1
-+
-2
-𝑥
-2
-+
-𝜀
-y=3x
-1
-	​
 
-+2x
-2
-	​
+𝑦 = 3𝑥_1 + 2𝑥_2 + 𝜀
 
-+ε
+- Low curvature
 
-Low curvature
+- Good for verifying correctness of optimizers
 
-Good for verifying correctness of optimizers
-
-Produces an almost-convex loss surface
+- Produces an almost-convex loss surface
 
 ### Medium Function (Mildly Nonlinear)
-𝑦
-=
-𝑥
-1
-2
-+
-sin
-⁡
-(
-𝑥
-2
-)
-+
-𝜀
-y=x
-1
-2
-	​
+𝑦 = 𝑥_1^2 + sin(𝑥_2) + 𝜀
 
-+sin(x
-2
-	​
+- Introduces moderate nonlinearity
 
-)+ε
+- Contains local curvature variations
 
-Introduces moderate nonlinearity
-
-Contains local curvature variations
-
-Useful for evaluating adaptive optimizers (Adam, RMSProp)
+- Useful for evaluating adaptive optimizers (Adam, RMSProp)
 
 ### Complex Function (Highly Nonlinear)
-𝑦
-=
-sin
-⁡
-(
-𝑥
-1
-𝑥
-2
-)
-  
-+
-  
-0.5
- 
-𝑥
-1
-3
-  
-−
-  
-𝑥
-2
-2
-  
-+
-  
-𝜀
-y=sin(x
-1
-	​
+𝑦 = sin(𝑥_1𝑥_2) + 0.5𝑥_1^3 − 𝑥_2^2 + 𝜀
 
-x
-2
-	​
+- Strong nonlinearity and multimodality
 
-)+0.5x
-1
-3
-	​
+- Produces a rugged loss landscape
 
-−x
-2
-2
-	​
+- Ideal for contrasting first-order vs. second-order behavior
 
-+ε
-
-Strong nonlinearity and multimodality
-
-Produces a rugged loss landscape
-
-Ideal for contrasting first-order vs. second-order behavior
-
-Usage in OptimizerArena
+### Usage in OptimizerArena
 
 Synthetic datasets are configured by:
 
-dataset_name="synthetic"
+- dataset_name="synthetic"
 
-func_variant ∈ {"simple", "medium", "complex"}
+- func_variant ∈ {"simple", "medium", "complex"}
 ## California Housing (Real Regression Dataset)
 
 ✔ Task: Regression
@@ -657,6 +537,7 @@ OptimizerArena/
 If you use OptimizerArena for research or teaching, please cite this repository.
 
 ---
+
 
 
 
