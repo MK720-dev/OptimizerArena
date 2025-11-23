@@ -314,17 +314,17 @@ All synthetic inputs follow:
 
 - Input sampling:
 
-	𝑋 ∈ 𝑅2 , 𝑋 ∼ 𝑁(0,1)
+	$$𝑋 ∈ 𝑅^2 , 𝑋 ∼ 𝑁(0,1)$$
 
 - Target generation:
 
-	𝑦 = 𝑓(𝑋) + 𝜀, 𝜀∼𝑁(0,0.1)
+	$$𝑦 = 𝑓(𝑋) + 𝜀, 𝜀∼𝑁(0,0.1)$$
 
 Depending on the selected function func_variant ∈ { "simple", "medium", "complex" }, the target values come from one of the following analytic functions:
 
 ### Simple Function (Linear)
 
-𝑦 = 3𝑥_1 + 2𝑥_2 + 𝜀
+$$𝑦 = 3𝑥_1 + 2𝑥_2 + 𝜀$$
 
 - Low curvature
 
@@ -333,7 +333,7 @@ Depending on the selected function func_variant ∈ { "simple", "medium", "compl
 - Produces an almost-convex loss surface
 
 ### Medium Function (Mildly Nonlinear)
-𝑦 = 𝑥_1^2 + sin(𝑥_2) + 𝜀
+$$𝑦 = 𝑥_1^2 + sin(𝑥_2) + 𝜀$$
 
 - Introduces moderate nonlinearity
 
@@ -342,7 +342,7 @@ Depending on the selected function func_variant ∈ { "simple", "medium", "compl
 - Useful for evaluating adaptive optimizers (Adam, RMSProp)
 
 ### Complex Function (Highly Nonlinear)
-𝑦 = sin(𝑥_1𝑥_2) + 0.5𝑥_1^3 − 𝑥_2^2 + 𝜀
+$$𝑦 = sin(𝑥_1𝑥_2) + 0.5𝑥_1^3 − 𝑥_2^2 + 𝜀$$
 
 - Strong nonlinearity and multimodality
 
@@ -537,6 +537,7 @@ OptimizerArena/
 If you use OptimizerArena for research or teaching, please cite this repository.
 
 ---
+
 
 
 
