@@ -338,33 +338,33 @@ OptimizerArena/
 # 6. References
 ## Optimization & Neural Network Training
 
-Nocedal, J., & Wright, S. (2006). Numerical Optimization (2nd ed.). Springer.
+- Nocedal, J., & Wright, S. (2006). Numerical Optimization (2nd ed.). Springer.
 — Standard reference for quasi-Newton methods (BFGS, line search, curvature conditions).
 
-Kingma, D. P., & Ba, J. (2015). Adam: A Method for Stochastic Optimization. ICLR.
+- Kingma, D. P., & Ba, J. (2015). Adam: A Method for Stochastic Optimization. ICLR.
 — Introduces Adam, the adaptive optimizer used as a baseline.
 
 ## Loss Landscape Visualization & PCA Geometry
 
-Li, H., Xu, Z., Taylor, G., & Goldstein, T. (2018). Visualizing the Loss Landscape of Neural Nets. NeurIPS.
+- Li, H., Xu, Z., Taylor, G., & Goldstein, T. (2018). Visualizing the Loss Landscape of Neural Nets. NeurIPS.
 — Foundation for PCA-based projection of high-dimensional weight trajectories.
 
-Jolliffe, I. T. (2002). Principal Component Analysis. Springer.
+- Jolliffe, I. T. (2002). Principal Component Analysis. Springer.
 — Classical treatment of PCA, eigen-decomposition, and dimensionality reduction.
 
 ## Surrogate Modeling & Surface Reconstruction
 
-Forrester, A., Sobester, A., & Keane, A. (2008). Engineering Design via Surrogate Modelling. Wiley.
+- Forrester, A., Sobester, A., & Keane, A. (2008). Engineering Design via Surrogate Modelling. Wiley.
 — Background for surrogate-based surface approximation in high-dimensional spaces.
 
-Neural Optimization Dynamics
+## Neural Optimization Dynamics
 
-Bottou, L., Curtis, F. E., & Nocedal, J. (2018). Optimization Methods for Large-Scale Machine Learning. SIAM Review.
+- Bottou, L., Curtis, F. E., & Nocedal, J. (2018). Optimization Methods for Large-Scale Machine Learning. SIAM Review.
 — Analysis of SGD regimes, convergence, and curvature behavior.
 
 ## Additional Useful Background
 
-Goodfellow, I., Bengio, Y., & Courville, A. (2016). Deep Learning. MIT Press.
+- Goodfellow, I., Bengio, Y., & Courville, A. (2016). Deep Learning. MIT Press.
 — Chapters on optimization, curvature, and training instability.
 
 # 7. Citation
@@ -372,6 +372,7 @@ Goodfellow, I., Bengio, Y., & Courville, A. (2016). Deep Learning. MIT Press.
 If you use OptimizerArena for research or teaching, please cite this repository.
 
 ---
+
 
 
 
