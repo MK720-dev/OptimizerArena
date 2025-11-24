@@ -19,6 +19,9 @@ The platform is designed for research, teaching, and the empirical study of opti
 
 ## Visual Demo
 
+Quick demo available here:  
+👉 [Download / Watch Demo 1](./OptimizerArenaDemo1.mp4)
+👉 [Download / Watch Demo 2](./OptimizerArenaDemo2.mp4)
 
 ---
 # 1. Web App Architecture Overview
@@ -576,6 +579,7 @@ Explore slicing techniques beyond 2-PC projection: use multi-plane slicing, 3-PC
 If you use OptimizerArena for research or teaching, please cite this repository.
 
 ---
+
 
 
 
